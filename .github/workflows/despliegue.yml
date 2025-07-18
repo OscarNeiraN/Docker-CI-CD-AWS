@@ -1,0 +1,31 @@
+name: despliegue contenedores
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: check repositorio
+              uses: actions/checkout@v3
+            - name: Login Docker Hub
+              run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            - name: Construir imagen docker
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest .
+            - name: Subir imagen a docker Hub
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest
+            
+            - name: Desplegar en instancia EC2
+              uses: appleboy/ssh-action@v0.1.10
+              with:
+                host: ${{ secrets.SERVER_IP }}
+                username: ${{ secrets.SERVER_USER }}
+                key: ${{ secrets.SSH_PRIVATE_KEY }}
+                script: |
+                  docker stop pagina || true
+                  docker rm pagina || true
+                  docker pull ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest
+                  docker run -d --name pagina -p 80:80 ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest
