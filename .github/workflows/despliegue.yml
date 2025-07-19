@@ -30,5 +30,5 @@ jobs:
                 script: |
                   docker stop pagina || true
                   docker rm pagina || true
-                  docker pull ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest
-                  docker run -d --name pagina -p 80:80 ${{ secrets.DOCKER_USERNAME }}/web-with-git:latest
+                  docker pull ${{ secrets.DOCKER_USERNAME }}/web-with-git:${{ env.COMMIT_SHA }}
+                  docker run -d --name pagina -p 80:80 ${{ secrets.DOCKER_USERNAME }}/web-with-git:${{ env.COMMIT_SHA }}
