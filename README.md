@@ -21,6 +21,7 @@ Contenido:
         -Login
             -Subir a repositorio Docker Hub
     -Conexión SSH instancia EC2 (AWS)
-        -Verificación si se encuentran activas contenedores antiguos
-            -Decargar Imagen
-                -correr contenedor.
+        -Verificación si se encuentran activas contenedores antiguos y los elimina
+            -Ejecucion de script para eliminar imagenes antiguas > tags
+                -Decargar Imagen
+                    -correr contenedor
