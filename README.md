@@ -23,4 +23,4 @@ Contenido:
     -Conexión SSH instancia EC2 (AWS)
         -Verificación si se encuentran activas contenedores antiguos
             -Decargar Imagen
-                -correr contenedor 
+                -correr contenedor.
