@@ -7,6 +7,7 @@ Despliegue de contenedores mediante Docker, integración e implementación conti
 Contenido:
     -Security Group
         -Instancia EC2
+            -Script instalacion Docker
 
 # DockerFile
 
@@ -25,3 +26,4 @@ Contenido:
             -Ejecucion de script para eliminar imagenes antiguas > tags
                 -Decargar Imagen
                     -correr contenedor
+
